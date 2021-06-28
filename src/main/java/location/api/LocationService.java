@@ -35,23 +35,6 @@ public class LocationService {
                 .collect(Collectors.toList());
     }
 
-    List<Location> findInAreaLimit(double x1, double y1, double x2, double y2, int limit) {
-        return findInArea(x1,y1,x2,y2).stream()
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    List<Location> findByTypeLimit(LocationType type, int limit) {
-        return locationRepository.findByType(type).stream().limit(limit).collect(Collectors.toList());
-    }
-
-    List<Location> findTypeInAreaLimit(double x1, double y1, double x2, double y2, LocationType type, int limit) {
-        return locationRepository.findByType(type).stream()
-                .filter(location -> isInArea(x1, y1, x2, y2, location))
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
     private boolean isInArea(double x1, double y1, double x2, double y2, Location location) {
         return location.getX() >= Math.min(x1, x2)
                 && location.getX() <= Math.max(x1, x2)
